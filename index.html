@@ -1,0 +1,81 @@
+<!DOCTYPE html><html style="width:100%;height:100%;background-color:black;"><head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="eaglercraft.dev | Play tons of Eaglercraft clients in your browser. Fast, secure, and free Minecraft alternative.">
+		<meta name="keywords" content="eaglercraft, eaglercraftx, minecraft, eagler, 1.8.8, 1.12.2, ggsmp, lax1dude, solenten, aerune1">
+		<title>eaglercraft.dev | Tuff Client Beta 1.1UT15 WASM</title>
+		<meta property="og:locale" content="en-US">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="eaglercraft.dev | Tuff Client Beta 1.1UT15 WASM">
+		<meta property="og:description" content="eaglercraft.dev | Play tons of Eaglercraft clients in your browser. Fast, secure, and free Minecraft alternative.">
+		<meta property="og:image" content="favicon.png">
+		<link type="image/png" rel="shortcut icon" href="favicon.png">
+		<script type="text/javascript" src="bootstrap.js"></script>
+		<script type="text/javascript">
+			"use strict";
+			window.addEventListener("load", async function() {
+				if(window.location.href.indexOf("file:") === 0) {
+					alert("HTTP please, do not open this file locally, run a local HTTP server and load it via HTTP");
+				}else {
+					
+					// %%%%%%%%% launch options %%%%%%%%%%%%
+					
+					var relayId = Math.floor(Math.random() * 3);
+					window.eaglercraftXOpts = {
+						demoMode: false,
+						container: "game_frame",
+						assetsURI: "assets.epw",
+						worldsDB: "worlds",
+					servers: [],
+					relays: [
+						{ addr: "wss://relay.deev.is/", comment: "lax1dude relay #1", primary: relayId == 0 },
+						{ addr: "wss://relay.lax1dude.net/", comment: "lax1dude relay #2", primary: relayId == 1 },
+						{ addr: "wss://relay.shhnowisnottheti.me/", comment: "ayunami relay #1", primary: relayId == 2 }
+					]
+				};
+				
+				await (async function() {
+					try {
+						var response = await fetch('/list.json', { cache: 'no-store' });
+						if (response.ok) {
+							var config = await response.json();
+							if (window.eaglercraftXOpts) {
+								if (Array.isArray(config)) {
+									window.eaglercraftXOpts.servers = config;
+								} else if (config && Array.isArray(config.servers)) {
+									window.eaglercraftXOpts.servers = config.servers;
+								}
+								if (config && Array.isArray(config.relays)) {
+									window.eaglercraftXOpts.relays = config.relays;
+								}
+							}
+						}
+					} catch (e) {}
+				})();
+				var q = window.location.search;
+				if((typeof q === "string") && q[0] === "?" && (typeof window.URLSearchParams !== "undefined")) {
+					q = new window.URLSearchParams(q);
+					var s = q.get("server");
+					if(s) window.eaglercraftXOpts.joinServer = s;
+				}
+				
+				main();
+			}
+		});
+		</script>
+	<!-- Google tag (gtag.js) -->
+    <script async="" src="../../../www.googletagmanager.com/gtag/js/id=G-EDTN01RR99"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EDTN01RR99', {
+            'send_page_view': true,
+            'anonymize_ip': false
+        });
+    </script>
+    <script defer="" src="../../dist/tracker.js"></script><script type="text/javascript" src="../../../https_/eaglercraft.dev/9757f3ce-9ffe-44b0-a487-41051ac50065"></script><script type="text/javascript" src="../../../https_/eaglercraft.dev/420c46cd-e85b-43cb-86db-6785812035c5"></script><link rel="preload" href="../../api/stats/live" crossorigin="">
+<link rel="preload" href="../../list.json" crossorigin="">
+<link rel="preload" href="../../api/stats/heartbeat" crossorigin="">
+<link rel="preload" href="assets.epw" crossorigin=""></head>
+	<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:black;" id="game_frame" class="_eaglercraftX_root_element"><div class="_eaglercraftX_wrapper_element" style="position: relative; width: 100%; height: 100%; overflow: hidden; background-color: rgb(239, 50, 61);"><div class="_eaglercraftX_early_splash_element" style="width: 100%; height: 100%; background-color: rgb(239, 50, 61); display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; inset: 0px; z-index: 2;"><canvas width="1024" height="256" aria-label="Mojang Studios" style="width: min(75vw, 100vh); max-width: 1000px; max-height: 35vh; aspect-ratio: 4 / 1; object-fit: contain; image-rendering: pixelated; pointer-events: none;"></canvas><div style="position: absolute; left: 15%; right: 15%; top: 83.25%; height: 10px; transform: translateY(-50%);"><div style="position: absolute; left: 1px; right: 1px; top: 0px; height: 1px; background-color: white;"></div><div style="position: absolute; left: 1px; right: 1px; bottom: 0px; height: 1px; background-color: white;"></div><div style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 1px; background-color: white;"></div><div style="position: absolute; right: 0px; top: 0px; bottom: 0px; width: 1px; background-color: white;"></div><div class="_eaglercraftX_early_splash_progress_inner" style="position: absolute; left: 2px; top: 2px; bottom: 2px; width: calc(100% - 4px); background-color: white;"></div></div></div><canvas class="_eaglercraftX_canvas_element" width="1280" height="720" style="width: 100%; height: 100%; z-index: 1; touch-action: pan-x pan-y; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); image-rendering: pixelated; cursor: default;"></canvas><div class="_eaglercraftX_keyboard_open_zone" style="display: none; position: absolute; background-color: transparent; top: 0px; left: 0px; width: 0px; height: 0px; z-index: 100; touch-action: pan-x pan-y; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);"></div></div></body></html>
